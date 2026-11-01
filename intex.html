@@ -1,81 +1,172 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NOVA AI - Chat</title>
 <style>
 * { box-sizing: border-box; }
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
   background: #0b1020;
   color: white;
+  font-family: Arial, sans-serif;
 }
 header {
-  padding: 22px;
   background: #151d35;
+  padding: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid #293657;
 }
-.logo { font-size: 27px; font-weight: bold; color: #65b8ff; }
-main { max-width: 850px; margin: auto; padding: 25px; }
-h1 { text-align: center; margin-top: 40px; }
-.subtitle { text-align: center; color: #aab8d3; }
-.tools {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-  gap: 15px;
-  margin-top: 35px;
+.logo {
+  color: #65b8ff;
+  font-size: 25px;
+  font-weight: bold;
 }
-.tool {
-  padding: 25px;
-  background: #18233d;
-  border: 1px solid #344567;
-  border-radius: 16px;
+#newChat {
+  background: #283957;
+  color: white;
+  border: 1px solid #405779;
+  border-radius: 8px;
+  padding: 10px;
+}
+main {
+  max-width: 850px;
+  margin: auto;
+  padding: 20px;
+}
+h1 { text-align: center; }
+.subtitle {
   text-align: center;
+  color: #aab8d3;
 }
-.tool .icon { font-size: 38px; }
-.tool h2 { font-size: 20px; }
-.tool p { color: #b7c4da; font-size: 14px; }
+#chat {
+  margin-top: 25px;
+  min-height: 300px;
+  max-height: 55vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.message {
+  padding: 13px 16px;
+  border-radius: 14px;
+  max-width: 85%;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.user {
+  background: #2769c9;
+  align-self: flex-end;
+}
+.bot {
+  background: #202d49;
+  align-self: flex-start;
+}
+.inputArea {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+input {
+  flex: 1;
+  min-width: 0;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #405779;
+  background: #18233d;
+  color: white;
+  font-size: 16px;
+}
 button {
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
   background: #397eea;
   color: white;
-  border: 0;
-  padding: 12px 20px;
-  border-radius: 9px;
-  cursor: pointer;
+  padding: 12px 17px;
 }
-footer { text-align:center; color:#8c9bb8; padding:30px; }
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #8292ae;
+  font-size: 12px;
+}
 </style>
 </head>
 <body>
 <header>
   <div class="logo">✦ NOVA AI</div>
+  <button id="newChat">＋ New Chat</button>
 </header>
+
 <main>
-  <h1>Welcome to NOVA AI</h1>
-  <p class="subtitle">Your personal AI world starts here.</p>
-  <section class="tools">
-    <div class="tool">
-      <div class="icon">💬</div>
-      <h2>NOVA Chat</h2>
-      <p>Talk with your AI assistant.</p>
-      <button onclick="alert('Chat coming soon!')">Open Chat</button>
+  <h1>Welcome to NOVA Chat</h1>
+  <p class="subtitle">Your personal AI assistant</p>
+
+  <div id="chat" aria-live="polite">
+    <div class="message bot">
+      Hello! 👋 Welcome to NOVA AI. What can I help you with today?
     </div>
-    <div class="tool">
-      <div class="icon">🎨</div>
-      <h2>NOVA Image</h2>
-      <p>Create amazing AI pictures.</p>
-      <button onclick="alert('Image creator coming soon!')">Create Image</button>
-    </div>
-    <div class="tool">
-      <div class="icon">🎬</div>
-      <h2>NOVA Video</h2>
-      <p>Turn ideas into videos.</p>
-      <button onclick="alert('Video creator coming soon!')">Create Video</button>
-    </div>
-  </section>
+  </div>
+
+  <div class="inputArea">
+    <input id="messageInput"
+      type="text"
+      placeholder="Ask NOVA anything..."
+      aria-label="Your message">
+    <button id="sendButton">Send ➤</button>
+  </div>
 </main>
-<footer>© 2026 NOVA AI · Built for your imagination</footer>
+
+<footer>
+  NOVA AI © 2026 | Your AI world
+</footer>
+
+<script>
+const chat = document.getElementById("chat");
+const input = document.getElementById("messageInput");
+
+function sendMessage() {
+  const message = input.value.trim();
+  if (!message) return;
+
+  const userMessage = document.createElement("div");
+  userMessage.className = "message user";
+  userMessage.textContent = message;
+  chat.appendChild(userMessage);
+
+  input.value = "";
+  chat.scrollTop = chat.scrollHeight;
+
+  const reply = document.createElement("div");
+  reply.className = "message bot";
+  reply.textContent =
+    "I received your message! My real AI brain will be connected in NOVA AI Lesson 5. 🚀";
+  chat.appendChild(reply);
+
+  chat.scrollTop = chat.scrollHeight;
+}
+
+document.getElementById("sendButton")
+  .addEventListener("click", sendMessage);
+
+input.addEventListener("keydown", function(event) {
+  if (event.key === "Enter") sendMessage();
+});
+
+document.getElementById("newChat")
+  .addEventListener("click", function() {
+    chat.innerHTML = "";
+    const welcome = document.createElement("div");
+    welcome.className = "message bot";
+    welcome.textContent = "New conversation started! Hello 👋";
+    chat.appendChild(welcome);
+  });
+</script>
 </body>
 </html>
