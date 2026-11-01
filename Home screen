@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOVA AI</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0b1020;
+  color: white;
+}
+header {
+  padding: 22px;
+  background: #151d35;
+  border-bottom: 1px solid #293657;
+}
+.logo { font-size: 27px; font-weight: bold; color: #65b8ff; }
+main { max-width: 850px; margin: auto; padding: 25px; }
+h1 { text-align: center; margin-top: 40px; }
+.subtitle { text-align: center; color: #aab8d3; }
+.tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+  gap: 15px;
+  margin-top: 35px;
+}
+.tool {
+  padding: 25px;
+  background: #18233d;
+  border: 1px solid #344567;
+  border-radius: 16px;
+  text-align: center;
+}
+.tool .icon { font-size: 38px; }
+.tool h2 { font-size: 20px; }
+.tool p { color: #b7c4da; font-size: 14px; }
+button {
+  background: #397eea;
+  color: white;
+  border: 0;
+  padding: 12px 20px;
+  border-radius: 9px;
+  cursor: pointer;
+}
+footer { text-align:center; color:#8c9bb8; padding:30px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">✦ NOVA AI</div>
+</header>
+<main>
+  <h1>Welcome to NOVA AI</h1>
+  <p class="subtitle">Your personal AI world starts here.</p>
+  <section class="tools">
+    <div class="tool">
+      <div class="icon">💬</div>
+      <h2>NOVA Chat</h2>
+      <p>Talk with your AI assistant.</p>
+      <button onclick="alert('Chat coming soon!')">Open Chat</button>
+    </div>
+    <div class="tool">
+      <div class="icon">🎨</div>
+      <h2>NOVA Image</h2>
+      <p>Create amazing AI pictures.</p>
+      <button onclick="alert('Image creator coming soon!')">Create Image</button>
+    </div>
+    <div class="tool">
+      <div class="icon">🎬</div>
+      <h2>NOVA Video</h2>
+      <p>Turn ideas into videos.</p>
+      <button onclick="alert('Video creator coming soon!')">Create Video</button>
+    </div>
+  </section>
+</main>
+<footer>© 2026 NOVA AI · Built for your imagination</footer>
+</body>
+</html>
